@@ -1,0 +1,39 @@
+header,
+footer {
+  font-family: Open Sans Condensed, sans-serif;
+}
+
+/* section.game-container {
+  margin: 40px;
+  background-color: #ccccb3
+  height: 125px;
+} */
+
+.game {
+  height: 500px;
+  display: none;
+  background-color: #EEE;
+}
+
+.game h1 {
+  font-family: Open Sans Condensed, sans-serif;
+  margin: -1px;
+}
+
+.difficulties-container {
+  height: 75px;
+  padding: 20px;
+  background-color: #EEE;
+}
+
+.btn.btn-primary {
+  border-radius: 2px;
+  border: 0px;
+  color: #ffffff;
+  text-shadow: none;
+
+}
+
+.btn.btn-primary:hover {
+  -webkit-filter:
+}
