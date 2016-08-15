@@ -1,0 +1,55 @@
+<!DOCType html>
+<html>
+<head>
+  <title>DiRekt</title>
+  <meta charset="utf-8"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="direkt.css">
+  <script src="direkt.js"></script>
+</head>
+<body>
+<header class="row text-center">
+  <h1>Di<b>Rekt</b></h1>
+</header>
+<section class="game-container">
+  <div class="game">
+    <div class="tutorial">
+      <h1 class="text-center">How to Play</h1>
+      <p class="col-md-4 col-md-offset-4 text-center">
+        The basis of the game is very simple; there are only four buttons you need to know!
+        If you're familiar with your &larr;, &uarr;, &rarr;, and &darr; keys, it should be easy to get started.
+        For the Easy difficulty, a random arrow will appear and stay visible for [some amount of time].
+        You'll then need to remember which arrow you saw before the next one appears.
+        When the next arrow appears, you have until it disappears to press the key that corresponds to the arrow you remember!
+        For the Normal difficulty, you have to remember the arrow you saw <i>two</i> before!
+        For the Hard difficulty, three, and the Impossible difficulty is anywhere between four and ten - it's up to you!
+        <br><br>Good luck!
+      </p>
+      <!--<button class="btn btn-primary" id="practice-btn">Practice</button>-->
+    </div>
+    <div class="activeGame">
+      <!--
+      <img id="left-arrow"/>
+      <img id="up-arrow"/>
+      <img id="right-arrow"/>
+      <img id="down-arrow"/>
+      -->
+    </div>
+  </div>
+  <div class="difficulties-container">
+    <div class="row text-center">
+      <button class="btn btn-primary" id="how-to-play-btn" style="background-color: #00e600">How to Play</button>
+      <button class="btn btn-primary" id="easy-btn" style="background-color: #00e6e6">Easy</button>
+      <button class="btn btn-primary" id="normal-btn" style="background-color: #00cccc">Normal</button>
+      <button class="btn btn-primary" id="hard-btn" style="background-color: #00b3b3">Hard</button>
+      <button class="btn btn-primary" id="impossible-btn" style="background-color: #009999">Impossible</button>
+    </div>
+  </div>
+</section>
+<footer class="row text-center" style="margin: 3px">
+  &copy; William Quick
+</footer>
+</body>
+</html>
