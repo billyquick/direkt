@@ -46,6 +46,8 @@ function startGame(difficulty){
        * with the user's input. Probably will look something like this:
        arrowValues[generateRandomArrow()];
        */
+       var arrowValues = [generateRandomArrow(), generateRandomArrow()];
+       displayArrows(arrowValues);
       break;
     case "normal-btn":
       //game
@@ -61,7 +63,11 @@ function startGame(difficulty){
   }
 }
 
+function displayArrows(arrowValues){
+    //need to display images or something in the mean time
+}
 function generateRandomArrow(){
   /* keycodes for arrows are 37-40 - want to generate a random number between those.
    */
+   return Math.floor(Math.random() * (41 - 37) + 37);
 }
