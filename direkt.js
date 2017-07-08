@@ -25,6 +25,7 @@ function transition(thisBtn){
   $(".game").slideUp(function complete(){
     if(thisBtn != "how-to-play-btn"){
       $(".tutorial").css("display", "none");
+      $(".activeGame").css("display", "block");
     } else {
       $(".tutorial").css("display", "block");
     }
@@ -47,7 +48,12 @@ function startGame(difficulty){
        arrowValues[generateRandomArrow()];
        */
        var arrowValues = [generateRandomArrow(), generateRandomArrow()];
-       displayArrows(arrowValues);
+       var game = setInterval(displayArrows(arrowValues[0]), 2000);
+       /* Placeholder code
+          if(userInput.isWrong()){
+            clearInterval(game);
+          }
+        */
       break;
     case "normal-btn":
       //game
@@ -65,6 +71,7 @@ function startGame(difficulty){
 
 function displayArrows(arrowValues){
     //need to display images or something in the mean time
+
 }
 function generateRandomArrow(){
   /* keycodes for arrows are 37-40 - want to generate a random number between those.
