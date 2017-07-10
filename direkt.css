@@ -43,6 +43,10 @@ html, body {
 
 }
 
+#leftarrow, #rightarrow, #uparrow, #downarrow {
+   visibility: hidden;
+
+}
 .btn.btn-primary:hover {
 
 }

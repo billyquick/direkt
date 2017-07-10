@@ -28,6 +28,7 @@ function transition(thisBtn){
       $(".activeGame").css("display", "block");
     } else {
       $(".tutorial").css("display", "block");
+      $(".activeGame").css("display", "none");
     }
     $(".game").slideDown(function complete(){
       startGame(thisBtn);
@@ -36,7 +37,8 @@ function transition(thisBtn){
   prevSelectedBtn = thisBtn;
 }
 
-// var arrowValues = [];
+
+var arrowValues = [generateRandomArrow(), generateRandomArrow()];
 function startGame(difficulty){
   switch(difficulty){
     case "easy-btn":
@@ -47,8 +49,7 @@ function startGame(difficulty){
        * with the user's input. Probably will look something like this:
        arrowValues[generateRandomArrow()];
        */
-       var arrowValues = [generateRandomArrow(), generateRandomArrow()];
-       var game = setInterval(displayArrows(arrowValues[0]), 2000);
+       var game = setInterval(displayArrows, 2000);
        /* Placeholder code
           if(userInput.isWrong()){
             clearInterval(game);
@@ -69,9 +70,26 @@ function startGame(difficulty){
   }
 }
 
-function displayArrows(arrowValues){
+function displayArrows(){
     //need to display images or something in the mean time
-
+    //clearArrowDisplay();
+    //alert(arrowValues[0]);
+    switch(arrowValues[0]){
+      case 37:
+        $("#leftarrow").css("visibilty", "visible");
+        break;
+      case 38:
+        $("#uparrow").css("visibilty", "visible");
+        break;
+      case 39:
+        $("#rightarrow").css("visibilty", "visible");
+        break;
+      case 40:
+        $("#leftarrow").css("visibilty", "visible");
+        break;
+      default:
+        break;
+    }
 }
 function generateRandomArrow(){
   /* keycodes for arrows are 37-40 - want to generate a random number between those.
