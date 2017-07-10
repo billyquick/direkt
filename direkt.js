@@ -72,25 +72,35 @@ function startGame(difficulty){
 
 function displayArrows(){
     //need to display images or something in the mean time
-    //clearArrowDisplay();
+    clearArrowDisplay();
     //alert(arrowValues[0]);
     switch(arrowValues[0]){
       case 37:
-        $("#leftarrow").css("visibilty", "visible");
+        $("#leftarrow").css("display", "block");
         break;
       case 38:
-        $("#uparrow").css("visibilty", "visible");
+        $("#uparrow").css("display", "block");
         break;
       case 39:
-        $("#rightarrow").css("visibilty", "visible");
+        $("#rightarrow").css("display", "block");
         break;
       case 40:
-        $("#leftarrow").css("visibilty", "visible");
+        $("#leftarrow").css("display", "block");
         break;
       default:
         break;
     }
+    arrowValues[0] = arrowValues[1];
+    arrowValues[1] = generateRandomArrow();
 }
+
+function clearArrowDisplay(){
+    $("#leftarrow").css("display", "none");
+    $("#uparrow").css("display", "none");
+    $("#rightarrow").css("display", "none");
+    $("#downarrow").css("display", "none");
+}
+
 function generateRandomArrow(){
   /* keycodes for arrows are 37-40 - want to generate a random number between those.
    */

@@ -44,7 +44,7 @@ html, body {
 }
 
 #leftarrow, #rightarrow, #uparrow, #downarrow {
-   visibility: hidden;
+   display: none;
 
 }
 .btn.btn-primary:hover {
