@@ -39,6 +39,7 @@ function transition(thisBtn){
 
 
 var arrowValues = [generateRandomArrow(), generateRandomArrow()];
+var game;
 function startGame(difficulty){
   switch(difficulty){
     case "easy-btn":
@@ -49,7 +50,7 @@ function startGame(difficulty){
        * with the user's input. Probably will look something like this:
        arrowValues[generateRandomArrow()];
        */
-       var game = setInterval(displayArrows, 2000);
+       beginGame();
        /* Placeholder code
           if(userInput.isWrong()){
             clearInterval(game);
@@ -58,9 +59,12 @@ function startGame(difficulty){
       break;
     case "normal-btn":
       //game
+      arrowValues[2] = generateRandomArrow();
       break;
     case "hard-btn":
       //game
+      arrowValues[2] = generateRandomArrow();
+      arrowValues[3] = generateRandomArrow();
       break;
     case "impossible-btn":
       //game
@@ -70,28 +74,48 @@ function startGame(difficulty){
   }
 }
 
+function beginGame(){
+  game = setInterval(displayArrows, 2000);
+}
+
 function displayArrows(){
-    //need to display images or something in the mean time
     clearArrowDisplay();
-    //alert(arrowValues[0]);
     switch(arrowValues[0]){
       case 37:
-        $("#leftarrow").css("display", "block");
+        $("#leftarrow").fadeIn();
+        //.css("display", "block");
         break;
       case 38:
-        $("#uparrow").css("display", "block");
+        $("#uparrow").fadeIn();
+        //.css("display", "block");
         break;
       case 39:
-        $("#rightarrow").css("display", "block");
+        $("#rightarrow").fadeIn();
+        //.css("display", "block");
         break;
       case 40:
-        $("#leftarrow").css("display", "block");
+        $("#leftarrow").fadeIn();
+        //.css("display", "block");
         break;
       default:
         break;
     }
-    arrowValues[0] = arrowValues[1];
-    arrowValues[1] = generateRandomArrow();
+    //checkUserInput();
+    //should work for all game types now
+    for(i = 0; i < arrowValues.length; i++){
+      arrowValues[i] = arrowValues[i + 1];
+    }
+    arrowValues[arrowValues.length - 1] = generateRandomArrow();
+}
+
+function checkUserInput(){
+    userInput = $('html').keydown(function (keypressed){
+      keypressed.keyCode;
+    });
+    /* if(userInput != arrowValues[0]){
+          clearArrowDisplay();
+          clearInterval(game);
+       }*/
 }
 
 function clearArrowDisplay(){
