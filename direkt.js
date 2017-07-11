@@ -1,6 +1,7 @@
 $(document).ready(handleButtonClicks);
 
-var prevSelectedBtn = null;
+var userInput;
+var prevSelectedBtn;
 function handleButtonClicks() {
   $(".btn.btn-primary").each(function(idx, btn){
     $(btn).click(registerBtnListeners.bind(this));
@@ -29,6 +30,7 @@ function transition(thisBtn){
     } else {
       $(".tutorial").css("display", "block");
       $(".activeGame").css("display", "none");
+      endGame();
     }
     $(".game").slideDown(function complete(){
       startGame(thisBtn);
@@ -51,6 +53,7 @@ function startGame(difficulty){
        arrowValues[generateRandomArrow()];
        */
        beginGame();
+       alert(userInput);
        /* Placeholder code
           if(userInput.isWrong()){
             clearInterval(game);
@@ -75,7 +78,12 @@ function startGame(difficulty){
 }
 
 function beginGame(){
-  game = setInterval(displayArrows, 2000);
+    displayArrows();
+    game = setInterval(displayArrows, 2000);
+}
+
+function endGame(){
+    clearInterval(game);
 }
 
 function displayArrows(){
@@ -94,7 +102,7 @@ function displayArrows(){
         //.css("display", "block");
         break;
       case 40:
-        $("#leftarrow").fadeIn();
+        $("#downarrow").fadeIn();
         //.css("display", "block");
         break;
       default:
@@ -109,8 +117,8 @@ function displayArrows(){
 }
 
 function checkUserInput(){
-    userInput = $('html').keydown(function (keypressed){
-      keypressed.keyCode;
+    $('html').keydown(function (keypressed){
+      userInput = keypressed.keyCode;
     });
     /* if(userInput != arrowValues[0]){
           clearArrowDisplay();
