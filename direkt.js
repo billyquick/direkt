@@ -78,6 +78,7 @@ function startGame(difficulty){
 }
 
 function beginGame(){
+    //alert(userInput);
     displayArrows();
     game = setInterval(displayArrows, 2000);
 }
@@ -109,7 +110,7 @@ function displayArrows(){
       default:
         break;
     }
-    //setTimeout(checkUserInput, 1000);
+    setTimeout(checkUserInput(), 4000);
 
     //should work for all game types now, but this is broken at the moment.
     //this is currently asking the user to predict the future - need to make this happen only if they get the first one right
@@ -117,15 +118,15 @@ function displayArrows(){
       arrowValues[i] = arrowValues[i + 1];
     }
     arrowValues[arrowValues.length - 1] = generateRandomArrow();
-
 }
 
 function checkUserInput(){
     $('html').keydown(function (keypressed){
       userInput = keypressed.keyCode;
     });
-    if(userInput != arrowValues[0]){
-          endGame();
+    if (userInput != arrowValues[0]){
+        console.log("this is happening");
+        endGame();
     }
 }
 
