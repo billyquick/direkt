@@ -42,6 +42,7 @@ function transition(thisBtn){
 
 var arrowValues = [generateRandomArrow(), generateRandomArrow()];
 var game;
+var score;
 function startGame(difficulty){
   switch(difficulty){
     case "easy-btn":
@@ -79,6 +80,7 @@ function startGame(difficulty){
 
 function beginGame(){
     //alert(userInput);
+    score = 0;
     displayArrows();
     game = setInterval(displayArrows, 2000);
 }
@@ -110,23 +112,36 @@ function displayArrows(){
       default:
         break;
     }
-    setTimeout(checkUserInput(), 4000);
 
-    //should work for all game types now, but this is broken at the moment.
-    //this is currently asking the user to predict the future - need to make this happen only if they get the first one right
-    for(i = 0; i < arrowValues.length; i++){
-      arrowValues[i] = arrowValues[i + 1];
+    //testing this for easy difficulty
+    if(score > 0){
+      setTimeout(checkUserInput, 2000);
+      score++;
+    } else {
+      setTimeout(checkUserInput, 4000);
+      score++;
     }
-    arrowValues[arrowValues.length - 1] = generateRandomArrow();
 }
 
+function advanceArrowArray() {
+  //should work for all game types now, but this is broken at the moment.
+  //this is currently asking the user to predict the future - need to make this happen only if they get the first one right
+  for(i = 0; i < arrowValues.length; i++){
+    arrowValues[i] = arrowValues[i + 1];
+  }
+  arrowValues[arrowValues.length - 1] = generateRandomArrow();
+}
 function checkUserInput(){
     $('html').keydown(function (keypressed){
       userInput = keypressed.keyCode;
     });
     if (userInput != arrowValues[0]){
         console.log("this is happening");
+        console.log();
+        console.log(arrowValues[0]);
         endGame();
+    } else {
+      advanceArrowArray();
     }
 }
 
