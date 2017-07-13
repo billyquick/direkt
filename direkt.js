@@ -55,6 +55,7 @@ function startGame(difficulty){
        arrowValues[generateRandomArrow()];
        */
        beginGame();
+       console.log("game begins");
        //alert(userInput);
        /* Placeholder code
           if(userInput.isWrong()){
@@ -82,11 +83,13 @@ function startGame(difficulty){
 function beginGame(){
     //alert(userInput);
     score = 0;
+    console.log("score initiated: " + score);
     displayArrows();
     game = setInterval(displayArrows, 2000);
 }
 
 function endGame(){
+    console.log("game over");
     clearArrowDisplay();
     clearInterval(game);
 }
@@ -142,10 +145,11 @@ function checkUserInput(){
       userInput = keypressed.keyCode;
     });*/
     if (userInput != arrowValues[0]){
-        console.log("this is happening so the value of the arrow is: " + arrowValues[0] + " and the user input is: " + userInput);
+        console.log("this is happening so the value of the arrowArray is: " + arrowValues + " and the user input is: " + userInput);
         //console.log(arrowValues[0]);
         endGame();
     } else {
+      console.log("arrow array advanced");
       advanceArrowArray();
     }
 }
