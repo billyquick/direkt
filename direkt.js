@@ -1,6 +1,5 @@
 $(document).ready(handleButtonClicks);
 
-var userInput;
 var prevSelectedBtn;
 function handleButtonClicks() {
   $(".btn.btn-primary").each(function(idx, btn){
@@ -20,6 +19,7 @@ function registerBtnListeners() {
 function hideGame(){
   $(".game").slideUp();
   prevSelectedBtn = null;
+  endGame();
 }
 
 function transition(thisBtn){
@@ -43,6 +43,7 @@ function transition(thisBtn){
 var arrowValues = [generateRandomArrow(), generateRandomArrow()];
 var game;
 var score;
+var userInput;
 function startGame(difficulty){
   switch(difficulty){
     case "easy-btn":
@@ -131,14 +132,18 @@ function advanceArrowArray() {
   }
   arrowValues[arrowValues.length - 1] = generateRandomArrow();
 }
+
+$(document).keydown(function (keypressed){
+  userInput = keypressed.keyCode;
+});
+
 function checkUserInput(){
-    $('html').keydown(function (keypressed){
+    /*$(document).keydown(function (keypressed){
       userInput = keypressed.keyCode;
-    });
+    });*/
     if (userInput != arrowValues[0]){
-        console.log("this is happening");
-        console.log();
-        console.log(arrowValues[0]);
+        console.log("this is happening so the value of the arrow is: " + arrowValues[0] + " and the user input is: " + userInput);
+        //console.log(arrowValues[0]);
         endGame();
     } else {
       advanceArrowArray();
