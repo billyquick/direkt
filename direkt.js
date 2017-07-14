@@ -1,6 +1,16 @@
 $(document).ready(handleButtonClicks);
 
+var arrowValues = [generateRandomArrow(), generateRandomArrow()];
+var game;
+var score;
+var userInput;
 var prevSelectedBtn;
+
+$(document).keydown(function (keypressed){
+  userInput = keypressed.keyCode;
+  console.log(userInput);
+});
+
 function handleButtonClicks() {
   $(".btn.btn-primary").each(function(idx, btn){
     $(btn).click(registerBtnListeners.bind(this));
@@ -39,11 +49,6 @@ function transition(thisBtn){
   prevSelectedBtn = thisBtn;
 }
 
-
-var arrowValues = [generateRandomArrow(), generateRandomArrow()];
-var game;
-var score;
-var userInput;
 function startGame(difficulty){
   switch(difficulty){
     case "easy-btn":
@@ -54,8 +59,8 @@ function startGame(difficulty){
        * with the user's input. Probably will look something like this:
        arrowValues[generateRandomArrow()];
        */
-       beginGame();
        console.log("game begins");
+       beginGame();
        //alert(userInput);
        /* Placeholder code
           if(userInput.isWrong()){
@@ -85,7 +90,7 @@ function beginGame(){
     score = 0;
     console.log("score initiated: " + score);
     displayArrows();
-    game = setInterval(displayArrows, 2000);
+    //game = setInterval(displayArrows, 2000);
 }
 
 function endGame(){
@@ -96,61 +101,65 @@ function endGame(){
 
 function displayArrows(){
     clearArrowDisplay();
-    switch(arrowValues[0]){
+
+    if(score > 0){
+      advanceArrowArray();
+    }
+
+    switch(arrowValues[arrowValues.length - 2]){
       case 37:
         $("#leftarrow").fadeIn();
-        //.css("display", "block");
         break;
       case 38:
         $("#uparrow").fadeIn();
-        //.css("display", "block");
         break;
       case 39:
         $("#rightarrow").fadeIn();
-        //.css("display", "block");
         break;
       case 40:
         $("#downarrow").fadeIn();
-        //.css("display", "block");
         break;
       default:
         break;
     }
 
-    //testing this for easy difficulty
     if(score > 0){
+      console.log("score is currently: " + score);
       setTimeout(checkUserInput, 2000);
-      score++;
     } else {
-      setTimeout(checkUserInput, 4000);
+      //advanceArrowArray();
+      console.log("this should only happen once");
       score++;
+      setTimeout(displayArrows, 2000);
     }
+
 }
 
 function advanceArrowArray() {
   //should work for all game types now, but this is broken at the moment.
   //this is currently asking the user to predict the future - need to make this happen only if they get the first one right
-  for(i = 0; i < arrowValues.length; i++){
+  /* for(i = 0; i < arrowValues.length; i++){
     arrowValues[i] = arrowValues[i + 1];
   }
-  arrowValues[arrowValues.length - 1] = generateRandomArrow();
+  arrowValues[arrowValues.length - 1] = generateRandomArrow(); */
+  arrowValues.push(generateRandomArrow());
 }
-
-$(document).keydown(function (keypressed){
-  userInput = keypressed.keyCode;
-});
 
 function checkUserInput(){
     /*$(document).keydown(function (keypressed){
       userInput = keypressed.keyCode;
     });*/
-    if (userInput != arrowValues[0]){
+
+    console.log("the game is expecting: " + arrowValues[arrowValues.length - 2]);
+    if ((userInput != arrowValues[arrowValues.length - 2]) && (score > 1)){
         console.log("this is happening so the value of the arrowArray is: " + arrowValues + " and the user input is: " + userInput);
         //console.log(arrowValues[0]);
         endGame();
     } else {
       console.log("arrow array advanced");
+      score++;
       advanceArrowArray();
+      displayArrows();
     }
 }
 
