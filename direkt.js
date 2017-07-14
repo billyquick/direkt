@@ -87,6 +87,8 @@ function endGame(){
 function displayArrows(){
     clearArrowDisplay();
 
+    //using this to make sure the game doesn't check for userInput before the appropriate arrow is displayed
+    //this currently only works for Easy mode, just like the rest of the code for now :thunker:
     if(score == 1){
       advanceArrowArray();
       //score++;
@@ -123,13 +125,13 @@ function displayArrows(){
 
 function advanceArrowArray() {
   console.log("arrow array advanced");
-  console.log(arrowValues);
+  //console.log(arrowValues);
   arrowValues.push(generateRandomArrow());
 }
 
 function checkUserInput(){
-    console.log("the game is expecting: " + arrowValues[arrowValues.length - 3] + " current input is: " + userInput);
-    if ((userInput != arrowValues[arrowValues.length - 3]) && (score > 0)){
+    console.log("the game is expecting: " + arrowValues[arrowValues.length - 4] + " current input is: " + userInput);
+    if ((userInput != arrowValues[arrowValues.length - 4]) && (score > 0)){
         console.log("this is happening so the value of the arrowArray is: " + arrowValues + " and the user input is: " + userInput);
         //console.log(arrowValues[0]);
         endGame();
