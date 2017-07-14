@@ -1,6 +1,6 @@
 $(document).ready(handleButtonClicks);
 
-var arrowValues = [generateRandomArrow(), generateRandomArrow()];
+var arrowValues = [generateRandomArrow(), generateRandomArrow(), generateRandomArrow()];
 var game;
 var score;
 var userInput;
@@ -102,11 +102,12 @@ function endGame(){
 function displayArrows(){
     clearArrowDisplay();
 
-    if(score > 0){
+    if(score == 1){
       advanceArrowArray();
+      //score++;
     }
 
-    switch(arrowValues[arrowValues.length - 2]){
+    switch(arrowValues[arrowValues.length - 3]){
       case 37:
         $("#leftarrow").fadeIn();
         break;
@@ -142,6 +143,8 @@ function advanceArrowArray() {
     arrowValues[i] = arrowValues[i + 1];
   }
   arrowValues[arrowValues.length - 1] = generateRandomArrow(); */
+  console.log("arrow array advanced");
+  console.log(arrowValues);
   arrowValues.push(generateRandomArrow());
 }
 
@@ -150,13 +153,12 @@ function checkUserInput(){
       userInput = keypressed.keyCode;
     });*/
 
-    console.log("the game is expecting: " + arrowValues[arrowValues.length - 2]);
-    if ((userInput != arrowValues[arrowValues.length - 2]) && (score > 1)){
+    console.log("the game is expecting: " + arrowValues[arrowValues.length - 3] + " current input is: " + userInput);
+    if ((userInput != arrowValues[arrowValues.length - 3]) && (score > 0)){
         console.log("this is happening so the value of the arrowArray is: " + arrowValues + " and the user input is: " + userInput);
         //console.log(arrowValues[0]);
         endGame();
     } else {
-      console.log("arrow array advanced");
       score++;
       advanceArrowArray();
       displayArrows();
