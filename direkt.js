@@ -85,13 +85,16 @@ function endGame(){
 }
 
 function displayArrows(){
+    //clears input to account for arrows repeating
+    userInput = undefined;
+
+    //empties arrow containers
     clearArrowDisplay();
 
     //using this to make sure the game doesn't check for userInput before the appropriate arrow is displayed
     //this currently only works for Easy mode, just like the rest of the code for now :thunker:
     if(score == 1){
       advanceArrowArray();
-      //score++;
     }
 
     switch(arrowValues[arrowValues.length - 3]){
@@ -130,10 +133,9 @@ function advanceArrowArray() {
 }
 
 function checkUserInput(){
-    console.log("the game is expecting: " + arrowValues[arrowValues.length - 4] + " current input is: " + userInput);
+    console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
     if ((userInput != arrowValues[arrowValues.length - 4]) && (score > 0)){
         console.log("this is happening so the value of the arrowArray is: " + arrowValues + " and the user input is: " + userInput);
-        //console.log(arrowValues[0]);
         endGame();
     } else {
       score++;
