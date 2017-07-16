@@ -5,6 +5,10 @@ var game;
 var score;
 var userInput;
 var prevSelectedBtn;
+var currentDifficulty;
+
+//this magic number is bad, but will be resolved when intervals change
+var displayInterval = 2000;
 
 $(document).keydown(function (keypressed){
   userInput = keypressed.keyCode;
@@ -53,19 +57,20 @@ function startGame(difficulty){
   switch(difficulty){
     case "easy-btn":
        console.log("game begins");
+       currentDifficulty = "easy";
        beginGame();
       break;
     case "normal-btn":
       //game
-      arrowValues[2] = generateRandomArrow();
+      currentDifficulty = "normal";
       break;
     case "hard-btn":
       //game
-      arrowValues[2] = generateRandomArrow();
-      arrowValues[3] = generateRandomArrow();
+      currentDifficulty = "hard";
       break;
     case "impossible-btn":
       //game
+      currentDifficulty = "impossible";
       break;
     default:
       break;
@@ -116,12 +121,11 @@ function displayArrows(){
 
     if(score > 0){
       console.log("score is currently: " + score);
-      setTimeout(checkUserInput, 2000);
+      setTimeout(checkUserInput, displayInterval);
     } else {
-      //advanceArrowArray();
       console.log("this should only happen once");
       score++;
-      setTimeout(displayArrows, 2000);
+      setTimeout(displayArrows, displayInterval);
     }
 
 }
@@ -135,7 +139,7 @@ function advanceArrowArray() {
 function checkUserInput(){
     console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
     if ((userInput != arrowValues[arrowValues.length - 4]) && (score > 0)){
-        console.log("this is happening so the value of the arrowArray is: " + arrowValues + " and the user input is: " + userInput);
+        console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
         endGame();
     } else {
       score++;
