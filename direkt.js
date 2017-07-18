@@ -63,6 +63,8 @@ function startGame(difficulty){
     case "normal-btn":
       //game
       currentDifficulty = "normal";
+      //arrowValues = [generateRandomArrow(), generateRandomArrow(), generateRandomArrow(), generateRandomArrow()];
+      beginGame();
       break;
     case "hard-btn":
       //game
@@ -93,6 +95,7 @@ function endGame(){
 function displayArrows(){
     //clears input to account for arrows repeating
     userInput = undefined;
+    console.log(currentDifficulty);
 
     //empties arrow containers
     clearArrowDisplay();
@@ -122,12 +125,16 @@ function displayArrows(){
         break;
     }
 
-    if(score > 0 && currentDifficulty == "easy"){
+    if((score > 0) && (currentDifficulty == "easy")){
+      console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
+      console.log("score is currently: " + score);
+      setTimeout(checkUserInput, displayInterval);
+    } else if((score > 1) && (currentDifficulty == "normal")){
       console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
       console.log("score is currently: " + score);
       setTimeout(checkUserInput, displayInterval);
     } else {
-      console.log("this should only happen once");
+      console.log("this should only happen once for Easy");
       score++;
       setTimeout(displayArrows, displayInterval);
     }
@@ -142,7 +149,10 @@ function advanceArrowArray() {
 
 function checkUserInput(){
     //this currently only works for Easy mode
-    if ((userInput != arrowValues[arrowValues.length - 4]) && (score > 0)){
+    if ((userInput != arrowValues[arrowValues.length - 4]) && (score > 0) && (currentDifficulty == "easy")){
+      console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
+      endGame();
+    } else if ((userInput != arrowValues[arrowValues.length - 5]) && (score > 0) && (currentDifficulty == "normal")){
       console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
       endGame();
     } else {
