@@ -7,7 +7,7 @@ var userInput;
 var prevSelectedBtn;
 var currentDifficulty;
 
-//this magic number is bad, but will be resolved when intervals change
+//default interval period, but will change as game goes on
 var displayInterval = 2000;
 
 $(document).keydown(function (keypressed){
@@ -87,6 +87,7 @@ function endGame(){
     console.log("game over");
     clearArrowDisplay();
     clearInterval(game);
+    //$(".activeGame p").css("display", "block");
 }
 
 function displayArrows(){
@@ -95,6 +96,7 @@ function displayArrows(){
 
     //empties arrow containers
     clearArrowDisplay();
+    //$(".activeGame p").css("display", "none");
 
     //using this to make sure the game doesn't check for userInput before the appropriate arrow is displayed
     //this currently only works for Easy mode, just like the rest of the code for now :thunker:
@@ -102,6 +104,7 @@ function displayArrows(){
       advanceArrowArray();
     }
 
+    //displays arrow, but this was tailored for easy mode - may need to revisit this
     switch(arrowValues[arrowValues.length - 3]){
       case 37:
         $("#leftarrow").fadeIn();
@@ -119,7 +122,8 @@ function displayArrows(){
         break;
     }
 
-    if(score > 0){
+    if(score > 0 && currentDifficulty == "easy"){
+      console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
       console.log("score is currently: " + score);
       setTimeout(checkUserInput, displayInterval);
     } else {
@@ -137,10 +141,10 @@ function advanceArrowArray() {
 }
 
 function checkUserInput(){
-    console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
+    //this currently only works for Easy mode
     if ((userInput != arrowValues[arrowValues.length - 4]) && (score > 0)){
-        console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
-        endGame();
+      console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
+      endGame();
     } else {
       score++;
       advanceArrowArray();

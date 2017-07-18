@@ -47,6 +47,13 @@ html, body {
    display: none;
 }
 
+.activeGame p {
+  font-family: Open Sans Condensed, sans-serif;
+  font-size: 20px;
+  margin-top: 35px;
+  display: none;
+}
+
 .btn.btn-primary:hover {
    /* want to add some sort of hover effect to the buttons */
 }
