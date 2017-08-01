@@ -70,6 +70,7 @@ function startGame(difficulty){
     case "hard-btn":
       //game
       currentDifficulty = "hard";
+      beginGame();
       break;
     case "impossible-btn":
       //game
@@ -128,12 +129,18 @@ function displayArrows(){
         break;
     }
 
-    if((score > 0) && (currentDifficulty == "easy")){
+    //I realize this is very redundant - will look at this later
+    /* if((score > 0) && (currentDifficulty == "easy")){
       console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
       console.log("score is currently: " + score);
       setTimeout(checkUserInput, displayInterval);
     } else if((score > 0) && (currentDifficulty == "normal")){
       console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
+      console.log("score is currently: " + score);
+      setTimeout(checkUserInput, displayInterval);
+    } */
+    if (score > 0){
+      //console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
       console.log("score is currently: " + score);
       setTimeout(checkUserInput, displayInterval);
     } else {
@@ -152,10 +159,13 @@ function advanceArrowArray() {
 
 function checkUserInput(){
     //this currently only works for Easy mode
-    if ((userInput != arrowValues[arrowValues.length - 4]) && (score > 0) && (currentDifficulty == "easy")){
+    if ((userInput != arrowValues[arrowValues.length - 4]) && (currentDifficulty == "easy")){
       console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
       endGame();
-    } else if ((userInput != arrowValues[arrowValues.length - 5]) && (score > 0) && (currentDifficulty == "normal")){
+    } else if ((userInput != arrowValues[arrowValues.length - 5]) && (currentDifficulty == "normal")){
+      console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
+      endGame();
+    } else if ((userInput != arrowValues[arrowValues.length - 6]) && (currentDifficulty == "hard")){
       console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
       endGame();
     } else {
