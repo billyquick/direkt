@@ -6,6 +6,7 @@ var score;
 var userInput;
 var prevSelectedBtn;
 var currentDifficulty;
+var gameInProgress;
 
 //default interval period, but will change as game goes on
 var displayInterval = 2000;
@@ -80,6 +81,7 @@ function startGame(difficulty){
 }
 
 function beginGame(){
+    gameInProgress = true;
     score = 0;
     console.log("score initiated: " + score);
     displayArrows();
@@ -89,13 +91,14 @@ function endGame(){
     console.log("game over");
     clearArrowDisplay();
     clearInterval(game);
+    gameInProgress = false;
     //$(".activeGame p").css("display", "block");
 }
 
 function displayArrows(){
     //clears input to account for arrows repeating
     userInput = undefined;
-    console.log(currentDifficulty);
+    //console.log(currentDifficulty);
 
     //empties arrow containers
     clearArrowDisplay();
@@ -129,7 +132,7 @@ function displayArrows(){
       console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
       console.log("score is currently: " + score);
       setTimeout(checkUserInput, displayInterval);
-    } else if((score > 1) && (currentDifficulty == "normal")){
+    } else if((score > 0) && (currentDifficulty == "normal")){
       console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
       console.log("score is currently: " + score);
       setTimeout(checkUserInput, displayInterval);
@@ -138,7 +141,7 @@ function displayArrows(){
       score++;
       setTimeout(displayArrows, displayInterval);
     }
-
+    console.log(arrowValues);
 }
 
 function advanceArrowArray() {

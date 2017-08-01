@@ -45,6 +45,7 @@ html, body {
 
 #leftarrow, #rightarrow, #uparrow, #downarrow {
    display: none;
+   margin-top: 75px;
 }
 
 .activeGame p {
