@@ -14,6 +14,7 @@ var gameInProgress;
 
 //default interval period, but will change as game goes on
 var displayInterval = 2000;
+var minimumDisplayInterval = 1000;
 
 $(document).keydown(function (keypressed){
   userInput = keypressed.keyCode;
@@ -113,10 +114,14 @@ function displayArrows(){
     //this currently only works for Easy mode, just like the rest of the code for now :thunker:
     if(score == 1){
       advanceArrowArray();
-    } else if (score == 15) {
+    } /* else if (score == 15) {
       displayInterval = displayInterval - 500;
     } else if (score == 25) {
       displayInterval = displayInterval - 500;
+    } */
+
+    if((score % 5 == 0) && (displayInterval > minimumDisplayInterval)){
+      decreaseDisplayInterval();
     }
 
     //displays arrow, but this was tailored for easy mode - may need to revisit this
@@ -188,6 +193,10 @@ function clearArrowDisplay(){
     $("#uparrow").css("display", "none");
     $("#rightarrow").css("display", "none");
     $("#downarrow").css("display", "none");
+}
+
+function decreaseDisplayInterval(){
+  displayInterval = displayInterval - 100;
 }
 
 function generateRandomArrow(){
