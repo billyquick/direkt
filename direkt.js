@@ -8,6 +8,10 @@ var prevSelectedBtn;
 var currentDifficulty;
 var gameInProgress;
 
+
+//TO-DO: Need to change how the array is made
+
+
 //default interval period, but will change as game goes on
 var displayInterval = 2000;
 
@@ -100,7 +104,7 @@ function displayArrows(){
     //clears input to account for arrows repeating
     userInput = undefined;
     //console.log(currentDifficulty);
-
+    document.getElementById('score').innerHTML = "score: " + score;
     //empties arrow containers
     clearArrowDisplay();
     //$(".activeGame p").css("display", "none");
@@ -109,6 +113,10 @@ function displayArrows(){
     //this currently only works for Easy mode, just like the rest of the code for now :thunker:
     if(score == 1){
       advanceArrowArray();
+    } else if (score == 15) {
+      displayInterval = displayInterval - 500;
+    } else if (score == 25) {
+      displayInterval = displayInterval - 500;
     }
 
     //displays arrow, but this was tailored for easy mode - may need to revisit this
