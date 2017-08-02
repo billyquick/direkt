@@ -11,9 +11,8 @@ var displayInterval = 2000;
 var minimumDisplayInterval = 1000;
 var personalBest = 0;
 
-/* TO-DO: Need to change how the array is made
- * Need to optimize the array creations for the different game types
- * currently an array is being made when the page is loaded, but shouldn't be made until
+/* TO-DO: Add Personal Best container and update when game finishes
+ * Make sure score does not appear in the How to Play section
  */
 
 $(document).keydown(function (keypressed){
@@ -47,9 +46,11 @@ function transition(thisBtn){
     if(thisBtn != "how-to-play-btn"){
       $(".tutorial").css("display", "none");
       $(".activeGame").css("display", "block");
+      $(".scoreContainer").css("display", "block");
     } else {
       $(".tutorial").css("display", "block");
       $(".activeGame").css("display", "none");
+      $(".scoreContainer").css("display", "none");
       endGame();
     }
     $(".game").slideDown(function complete(){
@@ -68,18 +69,14 @@ function startGame(difficulty){
        beginGame();
       break;
     case "normal-btn":
-      //game
       currentDifficulty = "normal";
-      //arrowValues = [generateRandomArrow(), generateRandomArrow(), generateRandomArrow(), generateRandomArrow()];
       beginGame();
       break;
     case "hard-btn":
-      //game
       currentDifficulty = "hard";
       beginGame();
       break;
     case "impossible-btn":
-      //game
       currentDifficulty = "impossible";
       break;
     default:
@@ -100,31 +97,28 @@ function beginGame(){
 
 function endGame(){
     console.log("game over");
+    if(score > personalBest){
+      personalBest = score;
+      document.getElementById('personalBest').innerHTML = "Personal Best: " + personalBest;
+    }
     clearArrowDisplay();
     clearInterval(game);
     gameInProgress = false;
-    //$(".activeGame p").css("display", "block");
 }
 
 function displayArrows(){
     //clears input to account for arrows repeating
     userInput = undefined;
-    //console.log(currentDifficulty);
+
     document.getElementById('score').innerHTML = "score: " + score;
-    //document.getElementById('personalBest').innerHTML = "Personal Best: " + personalBest;
+
     //empties arrow containers
     clearArrowDisplay();
-    //$(".activeGame p").css("display", "none");
 
     //using this to make sure the game doesn't check for userInput before the appropriate arrow is displayed
-    //this currently only works for Easy mode, just like the rest of the code for now :thunker:
     if(score == 1){
       advanceArrowArray();
-    } /* else if (score == 15) {
-      displayInterval = displayInterval - 500;
-    } else if (score == 25) {
-      displayInterval = displayInterval - 500;
-    } */
+    }
 
     if((score % 5 == 0) && (displayInterval > minimumDisplayInterval)){
       decreaseDisplayInterval();
@@ -148,18 +142,7 @@ function displayArrows(){
         break;
     }
 
-    //I realize this is very redundant - will look at this later
-    /* if((score > 0) && (currentDifficulty == "easy")){
-      console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
-      console.log("score is currently: " + score);
-      setTimeout(checkUserInput, displayInterval);
-    } else if((score > 0) && (currentDifficulty == "normal")){
-      console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
-      console.log("score is currently: " + score);
-      setTimeout(checkUserInput, displayInterval);
-    } */
     if (score > 0){
-      //console.log("the game is expecting: " + arrowValues[arrowValues.length - 4]);
       console.log("score is currently: " + score);
       setTimeout(checkUserInput, displayInterval);
     } else {
@@ -172,7 +155,6 @@ function displayArrows(){
 
 function advanceArrowArray() {
   console.log("arrow array advanced");
-  //console.log(arrowValues);
   arrowValues.push(generateRandomArrow());
 }
 
