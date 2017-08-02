@@ -1,20 +1,20 @@
 $(document).ready(handleButtonClicks);
 
-var arrowValues = [generateRandomArrow(), generateRandomArrow(), generateRandomArrow()];
+var arrowValues;
 var game;
 var score;
 var userInput;
 var prevSelectedBtn;
 var currentDifficulty;
 var gameInProgress;
-
-
-//TO-DO: Need to change how the array is made
-
-
-//default interval period, but will change as game goes on
 var displayInterval = 2000;
 var minimumDisplayInterval = 1000;
+var personalBest = 0;
+
+/* TO-DO: Need to change how the array is made
+ * Need to optimize the array creations for the different game types
+ * currently an array is being made when the page is loaded, but shouldn't be made until
+ */
 
 $(document).keydown(function (keypressed){
   userInput = keypressed.keyCode;
@@ -60,6 +60,7 @@ function transition(thisBtn){
 }
 
 function startGame(difficulty){
+  generateArrowArray();
   switch(difficulty){
     case "easy-btn":
        console.log("game begins");
@@ -86,6 +87,10 @@ function startGame(difficulty){
   }
 }
 
+function generateArrowArray(){
+    arrowValues = [generateRandomArrow(), generateRandomArrow(), generateRandomArrow()];
+}
+
 function beginGame(){
     gameInProgress = true;
     score = 0;
@@ -106,6 +111,7 @@ function displayArrows(){
     userInput = undefined;
     //console.log(currentDifficulty);
     document.getElementById('score').innerHTML = "score: " + score;
+    //document.getElementById('personalBest').innerHTML = "Personal Best: " + personalBest;
     //empties arrow containers
     clearArrowDisplay();
     //$(".activeGame p").css("display", "none");
