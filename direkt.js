@@ -11,8 +11,8 @@ var displayInterval = 2000;
 var minimumDisplayInterval = 1000;
 var personalBest = 0;
 
-/* TO-DO: Add Personal Best container and update when game finishes
- * Make sure score does not appear in the How to Play section
+/* TO-DO:
+ * check issues in the github repo
  */
 
 $(document).keydown(function (keypressed){
@@ -89,6 +89,7 @@ function generateArrowArray(){
 }
 
 function beginGame(){
+    $("#replayimage").css("display", "none");
     gameInProgress = true;
     score = 0;
     console.log("score initiated: " + score);
@@ -96,6 +97,7 @@ function beginGame(){
 }
 
 function endGame(){
+    $("#replayimage").css("display", "block");
     console.log("game over");
     if(score > personalBest){
       personalBest = score;

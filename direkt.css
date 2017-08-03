@@ -61,6 +61,10 @@ html, body {
   margin-top: 50px;
 }
 
+.scoreContainer img {
+  display: none;
+}
+
 .btn.btn-primary:hover {
    /* want to add some sort of hover effect to the buttons */
 }
