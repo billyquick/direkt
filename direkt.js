@@ -65,19 +65,19 @@ function startGame(difficulty){
   switch(difficulty){
     case "easy-btn":
        console.log("game begins");
-       currentDifficulty = "easy";
+       currentDifficulty = "easy-btn";
        beginGame();
       break;
     case "normal-btn":
-      currentDifficulty = "normal";
+      currentDifficulty = "normal-btn";
       beginGame();
       break;
     case "hard-btn":
-      currentDifficulty = "hard";
+      currentDifficulty = "hard-btn";
       beginGame();
       break;
     case "impossible-btn":
-      currentDifficulty = "impossible";
+      currentDifficulty = "impossible-btn";
       break;
     default:
       break;
@@ -162,13 +162,13 @@ function advanceArrowArray() {
 
 function checkUserInput(){
     //this currently only works for Easy mode
-    if ((userInput != arrowValues[arrowValues.length - 4]) && (currentDifficulty == "easy")){
+    if ((userInput != arrowValues[arrowValues.length - 4]) && (currentDifficulty == "easy-btn")){
       console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
       endGame();
-    } else if ((userInput != arrowValues[arrowValues.length - 5]) && (currentDifficulty == "normal")){
+    } else if ((userInput != arrowValues[arrowValues.length - 5]) && (currentDifficulty == "normal-btn")){
       console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
       endGame();
-    } else if ((userInput != arrowValues[arrowValues.length - 6]) && (currentDifficulty == "hard")){
+    } else if ((userInput != arrowValues[arrowValues.length - 6]) && (currentDifficulty == "hard-btn")){
       console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
       endGame();
     } else {
@@ -176,6 +176,11 @@ function checkUserInput(){
       advanceArrowArray();
       displayArrows();
     }
+}
+
+function replayGame(){
+    console.log("current difficulty: " + currentDifficulty);
+    startGame(currentDifficulty);
 }
 
 function clearArrowDisplay(){
