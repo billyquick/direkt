@@ -44,6 +44,12 @@ function hideGame(){
 function transition(thisBtn){
   $(".game").slideUp(function complete(){
     if(thisBtn != "how-to-play-btn"){
+      /* Need to add a check for a different difficulty selections
+       * currently players can see the score and replay button when changing difficulties until the slideDown is complete
+      if(thisBtn != currentDifficulty){
+        $(".activeGame").css("display", "none");
+        $(".scoreContainer").css("display", "none");
+      } */
       $(".tutorial").css("display", "none");
       $(".activeGame").css("display", "block");
       $(".scoreContainer").css("display", "block");
