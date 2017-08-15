@@ -10,6 +10,7 @@ var gameInProgress;
 var displayInterval = 2000;
 var minimumDisplayInterval = 1000;
 var personalBest = 0;
+var impossibleSelection;
 
 /* TO-DO:
  * check issues in the github repo
@@ -84,10 +85,16 @@ function startGame(difficulty){
       break;
     case "impossible-btn":
       currentDifficulty = "impossible-btn";
+      getUserImpossibleSelection();
       break;
     default:
       break;
   }
+}
+
+function getUserImpossibleSelection(){
+    impossibleSelection = +prompt("Please select a number greater than 4.");
+    beginGame();
 }
 
 function generateArrowArray(){
@@ -132,7 +139,6 @@ function displayArrows(){
       decreaseDisplayInterval();
     }
 
-    //displays arrow, but this was tailored for easy mode - may need to revisit this
     switch(arrowValues[arrowValues.length - 3]){
       case 37:
         $("#leftarrow").fadeIn();
@@ -175,6 +181,9 @@ function checkUserInput(){
       console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
       endGame();
     } else if ((userInput != arrowValues[arrowValues.length - 6]) && (currentDifficulty == "hard-btn")){
+      console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
+      endGame();
+    } else if ((userInput != arrowValues[arrowValues.length - (impossibleSelection + 3)]) && (currentDifficulty == "impossible-btn")){
       console.log("game ended. arrowArray is: " + arrowValues + " and the user input is: " + userInput);
       endGame();
     } else {
